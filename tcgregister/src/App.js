@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 // import bootstrap from "bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+// import { v4 as uuidv4 } from "uuid"
 
 function App() {
   const [email, setEmail] = useState("");
@@ -34,37 +35,39 @@ function App() {
   const submitHandle = (e) => {
     e.preventDefault();
 
-    const validateEmail = (email) => {
-      let re = /\S+@\S+\.\S+/;
-      return re.test(email);
-    };
-    if (validateEmail(email) === false) {
-      return alert("Please enter a valid email address");
-    } else if (idno.length !== 13) {
-      return alert("Please enter a valid ID");
-    } else if (phoneNumber.length !== 10) {
-      return alert("Please enter a valid phone number");
-    } else {
-      setEntries([
-        ...entries,
-        {
-          email: email,
-          surname: surname,
-          name: name,
-          IDnumber: idno,
-          phoneNo: phoneNumber,
-        },
-      ]);
-      setEmail("");
-      setSurname("");
-      setName("");
-      setIdno(0);
-      setPhoneNumber(0);
-    }
+    // const validateEmail = (email) => {
+    //   let re = /\S+@\S+\.\S+/;
+    //   return re.test(email);
+    // };
+    // if (validateEmail(email) === false) {
+    //   return alert("Please enter a valid email address");
+    // } else if (idno.length !== 13) {
+    //   return alert("Please enter a valid ID");
+    // } else if (phoneNumber.length !== 10) {
+    //   return alert("Please enter a valid phone number");
+    // } else {
+    setEntries([
+      ...entries,
+      {
+        id: Math.random() * 1000,
+        email: email,
+        surname: surname,
+        name: name,
+        IDnumber: idno,
+        phoneNo: phoneNumber,
+      },
+    ]);
+    setEmail("");
+    setSurname("");
+    setName("");
+    setIdno(0);
+    setPhoneNumber(0);
+    // }
   };
 
-  const deleteBtn = e => {
-    
+  const deleteBtn = (id) => {
+    let newList = entries.filter((item) => item.id !== id);
+    setEntries([...newList]);
   };
 
   return (
@@ -99,6 +102,7 @@ function App() {
                   <td>{entries.name}</td>
                   <td>{entries.IDnumber}</td>
                   <td>{entries.phoneNo}</td>
+                  <td><button onClick={()=>deleteBtn(entries.id)}>Delete</button></td>
                 </tr>
               );
             })}
