@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-// import bootstrap from "bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-// import { v4 as uuidv4 } from "uuid"
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Form, Row, Col, Button, Table } from "react-bootstrap";
 
 function App() {
   const [email, setEmail] = useState("");
@@ -57,6 +56,7 @@ function App() {
         phoneNo: phoneNumber,
       },
     ]);
+    // }
     setEmail("");
     setSurname("");
     setName("");
@@ -72,17 +72,60 @@ function App() {
 
   return (
     <div className="App">
-      <div className="form">
-        <label>E-mail: <input type="email" onChange={emailHandler} value={email} /></label>
-        <label>Surname: <input type="text" onChange={surnameHandler} value={surname} /></label>
-        <label>Name: <input type="text" onChange={nameHandler} value={name} /></label>
-        <label>ID Number: <input type="number" onChange={idnoHandler} value={idno} /></label>
-        <label>Phone Number: <input type="number" onChange={phoneNumberHandler} value={phoneNumber} /></label>
-        <button onClick={submitHandle} >Submit</button>
-      </div>
+      <Form>
+        <Form.Group className="mb-3" controlId="formGridEmail">
+          <Form.Label>E-mail</Form.Label>
+          <Form.Control
+            type="email"
+            placeholder="email?"
+            onChange={emailHandler}
+            value={email}
+          />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
+
+        <Row className="mb-3">
+            <Form.Group as={Col} controlId="formGridSurname">
+              <Form.Label>Surname</Form.Label>
+              <Form.Control type="text" placeholder="surname?" onChange={surnameHandler} value={surname} />
+            </Form.Group>
+          
+            <Form.Group as={Col} controlId="formGridName">
+              <Form.Label>Name</Form.Label>
+              <Form.Control type="text" placeholder="name?" onChange={nameHandler} value={name} />
+            </Form.Group>
+        </Row>
+
+        <Form.Group className="mb-3" controlId="formGridID Number">
+          <Form.Label>ID Number</Form.Label>
+          <Form.Control type="number" onChange={idnoHandler} value={idno} />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formGridPhone Number">
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control
+            type="number"
+            onChange={phoneNumberHandler}
+            value={phoneNumber}
+          />
+        </Form.Group>
+
+        <Button variant="primary" onClick={submitHandle}>
+          Submit
+        </Button>
+      </Form>
 
       <div className="table">
-        <table className="thead-dark" id="entries">
+        <Table
+          className="thead-dark"
+          striped
+          bordered
+          hover
+          size="sm"
+          variant="dark"
+        >
           <thead>
             <tr>
               <th scope="col">E-mail</th>
@@ -102,13 +145,20 @@ function App() {
                   <td>{entries.name}</td>
                   <td>{entries.IDnumber}</td>
                   <td>{entries.phoneNo}</td>
-                  <td><button onClick={()=>deleteBtn(entries.id)}>Delete</button></td>
+                  <td>
+                    <Button
+                      onClick={() => deleteBtn(entries.id)}
+                      variant="outline-danger"
+                    >
+                      Delete
+                    </Button>
+                  </td>
                 </tr>
               );
             })}
             {/* </tr> */}
           </tbody>
-        </table>
+        </Table>
       </div>
     </div>
   );
