@@ -1,7 +1,13 @@
 import React, { useState } from "react";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Form, Row, Col, Button, Table } from "react-bootstrap";
+import { Button, Col, Form, Row, Table } from "react-bootstrap";
+// import Button from 'react-bootstrap/Button';
+// import Col from 'react-bootstrap/Col';
+// import Form from 'react-bootstrap/Form';
+// import Row from 'react-bootstrap/Row';
+// import Table from "react-bootstrap/Table"
+
+
 
 function App() {
   const [email, setEmail] = useState("");
@@ -72,8 +78,10 @@ function App() {
 
   return (
     <div className="App">
+      <div className="form">
       <Form>
-        <Form.Group className="mb-3" controlId="formGridEmail">
+          <Row className="mb-3">
+        <Form.Group as={Col} controlId="formGridEmail">
           <Form.Label>E-mail</Form.Label>
           <Form.Control
             type="email"
@@ -86,17 +94,16 @@ function App() {
           </Form.Text>
         </Form.Group>
 
-        <Row className="mb-3">
             <Form.Group as={Col} controlId="formGridSurname">
               <Form.Label>Surname</Form.Label>
               <Form.Control type="text" placeholder="surname?" onChange={surnameHandler} value={surname} />
             </Form.Group>
+        </Row>
           
             <Form.Group as={Col} controlId="formGridName">
               <Form.Label>Name</Form.Label>
               <Form.Control type="text" placeholder="name?" onChange={nameHandler} value={name} />
             </Form.Group>
-        </Row>
 
         <Form.Group className="mb-3" controlId="formGridID Number">
           <Form.Label>ID Number</Form.Label>
@@ -116,6 +123,7 @@ function App() {
           Submit
         </Button>
       </Form>
+      </div>
 
       <div className="table">
         <Table
